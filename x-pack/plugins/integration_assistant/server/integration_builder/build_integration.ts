@@ -170,7 +170,7 @@ function createPackageManifestDict(
     ],
     owner: {
       github: package_owner,
-      type: 'elastic',
+      type: 'community',
     },
   };
 
