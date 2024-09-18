@@ -28,8 +28,6 @@ export function createReadme(packageDir: string, integration: Integration, field
         fields: fields
     });
 
-    console.log(readmeTemplate)
-
     createSync(joinPath(readmeDirPath, 'README.md'), readmeTemplate);
     createSync(joinPath(mainReadmeDirPath, 'README.md'), readmeTemplate);
 }

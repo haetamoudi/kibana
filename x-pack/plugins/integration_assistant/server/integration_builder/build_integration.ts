@@ -56,8 +56,6 @@ export async function buildPackage(integration: Integration): Promise<Buffer> {
 
   createReadme(packageDir, integration, dataStreamFields);
   const zipBuffer = await createZipArchive(workingDir, packageDirectoryName);
-  console.log('DUMP')
-  console.log(JSON.stringify(dataStreamFields))
   removeDirSync(workingDir);
   return zipBuffer;
 }

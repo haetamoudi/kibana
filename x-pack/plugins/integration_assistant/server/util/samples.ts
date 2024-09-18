@@ -212,14 +212,14 @@ export function mergeSamples(objects: any[]): string {
   return JSON.stringify(result, null, 2);
 }
 
-export function flattenObjectsList(obj: any[]): object[] {
+export function flattenObjectsList(obj: any[]): { name: string; type: string; description?: string }[] {
   const result = flattenObject(obj)
 
   return sortListOfObjects(result)
 }
 
-function flattenObject(obj: any[], parentKey: string = '', separator: string = '.'): object[] {
-  let result: object[] = [];
+function flattenObject(obj: any[], parentKey: string = '', separator: string = '.'): { name: string; type: string; description?: string }[] {
+  let result: { name: string; type: string; description?: string }[] = [];
 
   obj.forEach(element => {
     if (element.name) {
@@ -241,11 +241,9 @@ function flattenObject(obj: any[], parentKey: string = '', separator: string = '
   return result;
 }
 
-function sortListOfObjects(objectsList: object[]): object[] {
+function sortListOfObjects(objectsList: { name: string; type: string; description?: string }[]): { name: string; type: string; description?: string }[] {
   return objectsList.sort((a, b) => {
-    const keyA = Object.keys(a)[0];
-    const keyB = Object.keys(b)[0];
-    return keyA.localeCompare(keyB);
+    return (a.name || '').localeCompare(b.name || '');
   });
 }
 
