@@ -1,0 +1,29 @@
+### Create an Event Hub
+
+The event hub receives the logs exported from the Azure service and makes them available to the Elastic Agent to pick up.
+
+Here's the high-level overview of the required steps:
+
+* Create a resource group, or select an existing one.
+* Create an Event Hubs namespace.
+* Create an event hub.
+
+For a detailed step-by-step guide, check the quickstart [Create an event hub using Azure portal](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create).
+
+Take note of the event hub **Name**, which you will use later when specifying an **eventhub** in the integration settings.
+
+#### Event Hubs Namespace vs Event Hub
+
+You should use the event hub name (not the Event Hubs namespace name) as a value for the  **eventhub** option in the integration settings.
+
+If you are new to Event Hubs, think of the Event Hubs namespace as the cluster and the event hub as the topic. You will typically have one cluster and multiple topics.
+
+If you are familiar with Kafka, here's a conceptual mapping between the two:
+
+| Kafka Concept  | Event Hub Concept |
+|----------------|-------------------|
+| Cluster        | Namespace         |
+| Topic          | An event hub      |
+| Partition      | Partition         |
+| Consumer Group | Consumer Group    |
+| Offset         | Offset            |
