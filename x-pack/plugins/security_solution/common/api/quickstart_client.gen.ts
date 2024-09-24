@@ -99,6 +99,7 @@ import type {
   GetRuleExecutionResultsResponse,
 } from './detection_engine/rule_monitoring/rule_execution_logs/get_rule_execution_results/get_rule_execution_results_route.gen';
 import type {
+  RulePreviewRequestQueryInput,
   RulePreviewRequestBodyInput,
   RulePreviewResponse,
 } from './detection_engine/rule_preview/rule_preview.gen';
@@ -269,6 +270,10 @@ import type {
   StopEntityStoreRequestParamsInput,
   StopEntityStoreResponse,
 } from './entity_analytics/entity_store/engine/stop.gen';
+import type {
+  ListEntitiesRequestQueryInput,
+  ListEntitiesResponse,
+} from './entity_analytics/entity_store/entities/list_entities.gen';
 import type { DisableRiskEngineResponse } from './entity_analytics/risk_engine/engine_disable_route.gen';
 import type { EnableRiskEngineResponse } from './entity_analytics/risk_engine/engine_enable_route.gen';
 import type { InitRiskEngineResponse } from './entity_analytics/risk_engine/engine_init_route.gen';
@@ -310,7 +315,10 @@ import type {
   GetDraftTimelinesRequestQueryInput,
   GetDraftTimelinesResponse,
 } from './timeline/get_draft_timelines/get_draft_timelines_route.gen';
-import type { GetNotesRequestQueryInput } from './timeline/get_notes/get_notes_route.gen';
+import type {
+  GetNotesRequestQueryInput,
+  GetNotesResponse,
+} from './timeline/get_notes/get_notes_route.gen';
 import type {
   GetTimelineRequestQueryInput,
   GetTimelineResponse,
@@ -495,8 +503,11 @@ after 30 days. It also deletes other artifacts specific to the migration impleme
       .catch(catchAxiosErrorFormatAndThrow);
   }
   /**
-   * Bulk upsert up to 1000 asset criticality records, creating or updating them as needed.
-   */
+    * Bulk upsert up to 1000 asset criticality records.
+
+If asset criticality records already exist for the specified entities, those records are overwritten with the specified values. If asset criticality records don't exist for the specified entities, new records are created.
+
+    */
   async bulkUpsertAssetCriticalityRecords(props: BulkUpsertAssetCriticalityRecordsProps) {
     this.log.info(`${new Date().toISOString()} Calling API BulkUpsertAssetCriticalityRecords`);
     return this.kbnClient
@@ -560,8 +571,11 @@ Migrations are initiated per index. While the process is neither destructive nor
       .catch(catchAxiosErrorFormatAndThrow);
   }
   /**
-   * Create or update a criticality record for a specific asset.
-   */
+    * Create or update an asset criticality record for a specific entity.
+
+If a record already exists for the specified entity, that record is overwritten with the specified value. If a record doesn't exist for the specified entity, a new record is created.
+
+    */
   async createAssetCriticalityRecord(props: CreateAssetCriticalityRecordProps) {
     this.log.info(`${new Date().toISOString()} Calling API CreateAssetCriticalityRecord`);
     return this.kbnClient
@@ -636,7 +650,7 @@ Migrations are initiated per index. While the process is neither destructive nor
       .catch(catchAxiosErrorFormatAndThrow);
   }
   /**
-   * Delete the asset criticality record for a specific asset if it exists.
+   * Delete the asset criticality record for a specific entity.
    */
   async deleteAssetCriticalityRecord(props: DeleteAssetCriticalityRecordProps) {
     this.log.info(`${new Date().toISOString()} Calling API DeleteAssetCriticalityRecord`);
@@ -1141,7 +1155,7 @@ finalize it.
       .catch(catchAxiosErrorFormatAndThrow);
   }
   /**
-   * Get the criticality record for a specific asset.
+   * Get the asset criticality record for a specific entity.
    */
   async getAssetCriticalityRecord(props: GetAssetCriticalityRecordProps) {
     this.log.info(`${new Date().toISOString()} Calling API GetAssetCriticalityRecord`);
@@ -1243,7 +1257,7 @@ finalize it.
   async getNotes(props: GetNotesProps) {
     this.log.info(`${new Date().toISOString()} Calling API GetNotes`);
     return this.kbnClient
-      .request({
+      .request<GetNotesResponse>({
         path: '/api/note',
         headers: {
           [ELASTIC_HTTP_VERSION_HEADER]: '2023-10-31',
@@ -1471,6 +1485,23 @@ finalize it.
         },
         method: 'POST',
         body: props.attachment,
+      })
+      .catch(catchAxiosErrorFormatAndThrow);
+  }
+  /**
+   * List entities records, paging, sorting and filtering as needed.
+   */
+  async listEntities(props: ListEntitiesProps) {
+    this.log.info(`${new Date().toISOString()} Calling API ListEntities`);
+    return this.kbnClient
+      .request<ListEntitiesResponse>({
+        path: '/api/entity_store/entities/list',
+        headers: {
+          [ELASTIC_HTTP_VERSION_HEADER]: '2023-10-31',
+        },
+        method: 'GET',
+
+        query: props.query,
       })
       .catch(catchAxiosErrorFormatAndThrow);
   }
@@ -1742,9 +1773,13 @@ detection engine rules.
         },
         method: 'POST',
         body: props.body,
+        query: props.query,
       })
       .catch(catchAxiosErrorFormatAndThrow);
   }
+  /**
+   * Schedule the risk scoring engine to run as soon as possible. You can use this to recalculate entity risk scores after updating their asset criticality.
+   */
   async scheduleRiskEngineNow() {
     this.log.info(`${new Date().toISOString()} Calling API ScheduleRiskEngineNow`);
     return this.kbnClient
@@ -2104,6 +2139,9 @@ export interface InstallPrepackedTimelinesProps {
 export interface InternalUploadAssetCriticalityRecordsProps {
   attachment: FormData;
 }
+export interface ListEntitiesProps {
+  query: ListEntitiesRequestQueryInput;
+}
 export interface PatchRuleProps {
   body: PatchRuleRequestBodyInput;
 }
@@ -2136,6 +2174,7 @@ export interface ResolveTimelineProps {
   query: ResolveTimelineRequestQueryInput;
 }
 export interface RulePreviewProps {
+  query: RulePreviewRequestQueryInput;
   body: RulePreviewRequestBodyInput;
 }
 export interface SearchAlertsProps {
