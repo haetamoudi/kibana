@@ -46,12 +46,20 @@ You can use our hosted Elasticsearch Service on Elastic Cloud, which is recommen
 The requirements section helps readers to confirm that the integration will work with their systems.
 Check the [requirements guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-requirements) for more information.
 
+### Compatibility
+
+This integration has been tested against {{ package_name }} on versions: 
+
+Insert logs versions
+
 ## Setup
 
 Point the reader to the [Observability Getting started guide](https://www.elastic.co/guide/en/observability/master/observability-get-started.html) for generic, step-by-step instructions. Include any additional setup instructions beyond what’s included in the guide, which may include instructions to update the configuration of a third-party service.
 Check the [setup guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-setup) for more information.
 
 ## Troubleshooting (optional)
+
+- If some fields appear conflicted under the ``logs-*`` or ``metrics-*`` data views, this issue can be resolved by [reindexing](https://www.elastic.co/guide/en/elasticsearch/reference/current/use-a-data-stream.html#reindex-with-a-data-stream) the concerned data stream.
 
 Provide information about special cases and exceptions that aren’t necessary for getting started or won’t be applicable to all users. Check the [troubleshooting guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-troubleshooting) for more information.
 
