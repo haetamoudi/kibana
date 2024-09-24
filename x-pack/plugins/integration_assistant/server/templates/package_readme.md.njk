@@ -10,6 +10,15 @@ Check the [overview guidelines](https://www.elastic.co/guide/en/integrations-dev
 Provide a high-level overview of the kind of data that is collected by the integration. 
 Check the [datastreams guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-datastreams) for more information.
 
+The {{ package_name }} integration collects {{ data_streams.length }} {{ data_streams.length > 1 ? 'types' : 'type' }} of data streams: {{ data_streams.name | join(', ') }}.
+
+{% for data_stream in data_streams %}
+***{{ data_stream.name }}***
+
+Insert a description of the datastream here.
+
+{% endfor %}
+
 ## Requirements
 
 Elastic Agent must be installed. For more information, refer to the link [here](https://www.elastic.co/guide/en/fleet/current/elastic-agent-installation.html).
