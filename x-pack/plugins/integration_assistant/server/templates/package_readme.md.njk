@@ -5,12 +5,17 @@
 Explain what the integration is, define the third-party product that is providing data, establish its relationship to the larger ecosystem of Elastic products, and help the reader understand how it can be used to solve a tangible problem.
 Check the [overview guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-overview) for more information.
 
-## Datastreams
+## Data streams
 
 Provide a high-level overview of the kind of data that is collected by the integration. 
 Check the [datastreams guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-datastreams) for more information.
 
-The {{ package_name }} integration collects {{ data_streams.length }} {{ data_streams.length > 1 ? 'types' : 'type' }} of data streams: {{ data_streams.name | join(', ') }}.
+The {{ package_name }} integration collects {{ data_streams.length }} {% if data_streams.length > 1 %}types{% else %}type{% endif %} of data streams: 
+{% for stream in data_streams %}
+  {{ stream.name }}{% if not loop.last %}, {% endif %}
+{% endfor %}.
+
+
 
 {% for data_stream in data_streams %}
 ***{{ data_stream.name }}***
@@ -53,6 +58,8 @@ This integration has been tested against {{ package_name }} on versions:
 Insert logs versions
 
 ## Setup
+
+{{ setup_text}}
 
 Point the reader to the [Observability Getting started guide](https://www.elastic.co/guide/en/observability/master/observability-get-started.html) for generic, step-by-step instructions. Include any additional setup instructions beyond what’s included in the guide, which may include instructions to update the configuration of a third-party service.
 Check the [setup guidelines](https://www.elastic.co/guide/en/integrations-developer/current/documentation-guidelines.html#idg-docs-guidelines-setup) for more information.

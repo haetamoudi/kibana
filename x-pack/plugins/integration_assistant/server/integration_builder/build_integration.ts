@@ -10,7 +10,7 @@ import nunjucks from 'nunjucks';
 import { getDataPath } from '@kbn/utils';
 import { join as joinPath } from 'path';
 import { dump } from 'js-yaml';
-import type { DataStream, Integration } from '../../common';
+import type { DataStream, InputType, Integration } from '../../common';
 import { createSync, ensureDirSync, generateUniqueId, removeDirSync } from '../util';
 import { createAgentInput } from './agent';
 import { createDataStream } from './data_stream';
@@ -24,7 +24,8 @@ function configureNunjucks() {
   const agentTemplates = joinPath(templateDir, 'agent');
   const manifestTemplates = joinPath(templateDir, 'manifest');
   const systemTestTemplates = joinPath(templateDir, 'system_tests');
-  nunjucks.configure([templateDir, agentTemplates, manifestTemplates, systemTestTemplates], {
+  const readmeTemplates = joinPath(templateDir, 'readme');
+  nunjucks.configure([templateDir, agentTemplates, manifestTemplates, systemTestTemplates, readmeTemplates], {
     autoescape: false,
   });
 }
@@ -105,15 +106,34 @@ function createChangelog(packageDir: string): void {
 function createReadme(packageDir: string, integration: Integration) {
   const readmeDirPath = joinPath(packageDir, '_dev/build/docs/');
   const mainReadmeDirPath = joinPath(packageDir, 'docs/');
+  const inputTypes = getInputTypes(integration)
+  const setupText = createSetupDocumentation(inputTypes)
   ensureDirSync(mainReadmeDirPath);
   ensureDirSync(readmeDirPath);
   const readmeTemplate = nunjucks.render('package_readme.md.njk', {
     package_name: integration.name,
     data_streams: integration.dataStreams,
+    setup_text: setupText
   });
 
   createSync(joinPath(readmeDirPath, 'README.md'), readmeTemplate);
   createSync(joinPath(mainReadmeDirPath, 'README.md'), readmeTemplate);
+}
+
+function getInputTypes(integration: Integration) {
+  const inputTypes = integration.dataStreams.flatMap(stream => stream.inputTypes);
+
+  return inputTypes
+}
+
+function createSetupDocumentation(inputTypes: InputType[]): string {
+  let setupText = '';
+  for (const inputType of inputTypes) {
+    const setupTemplate = nunjucks.render(`setup/${inputType}.md.njk`);
+    setupText = `${setupText}\n${setupTemplate}`
+  }
+
+  return setupText;
 }
 
 async function createZipArchive(workingDir: string, packageDirectoryName: string): Promise<Buffer> {
