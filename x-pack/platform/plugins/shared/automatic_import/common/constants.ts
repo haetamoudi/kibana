@@ -11,7 +11,7 @@ import type { LicenseType } from '@kbn/licensing-plugin/common/types';
 export const PLUGIN_ID = 'integrationAssistant';
 
 // Public App Routes
-export const INTEGRATION_ASSISTANT_APP_ROUTE = '/app/integration_assistant';
+export const INTEGRATION_ASSISTANT_APP_ROUTE = '/app/automatic_import';
 
 // Server API Routes
 export const INTEGRATION_ASSISTANT_BASE_PATH = '/internal/automatic_import';

@@ -9,19 +9,14 @@
     "id": "integrationAssistant",
     "server": true,
     "browser": true,
-    "configPath": [
-      "xpack",
-      "integration_assistant"
-    ],
+    "configPath": ["xpack", "automatic_import"],
     "requiredPlugins": [
       "kibanaReact",
       "licensing",
       "triggersActionsUi",
       "actions",
-      "stackConnectors",
+      "stackConnectors"
     ],
-    "requiredBundles": [
-      "kibanaUtils",
-    ]
+    "requiredBundles": ["kibanaUtils"]
   }
 }
