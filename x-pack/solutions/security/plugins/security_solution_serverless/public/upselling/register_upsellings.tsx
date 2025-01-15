@@ -14,7 +14,7 @@ import type { SecurityProductTypes } from '../../common/config';
 import { getProductProductFeatures } from '../../common/pli/pli_features';
 import type { Services } from '../common/services';
 import { withServicesProvider } from '../common/services';
-import { upsellingPages, upsellingSections, upsellingMessages } from './upsellings';
+import { upsellingMessages, upsellingPages, upsellingSections } from './upsellings';
 
 export const registerUpsellings = (productTypes: SecurityProductTypes, services: Services) => {
   const upsellingService = registerSecuritySolutionUpsellings(productTypes, services);
@@ -73,10 +73,10 @@ const registerSecuritySolutionUpsellings = (
  * Configures the upsellings for other plugins.
  */
 const configurePluginsUpsellings = (upsellingService: UpsellingService, services: Services) => {
-  const { integrationAssistant } = services;
+  const { automaticImport } = services;
 
   upsellingService.sections$.subscribe((sections) => {
     // @ts-expect-error Type 'FunctionComponent<{}>' is not assignable to type 'ReactNode'.
-    integrationAssistant?.renderUpselling(sections.get('integration_assistant'));
+    automaticImport?.renderUpselling(sections.get('automatic_import'));
   });
 };

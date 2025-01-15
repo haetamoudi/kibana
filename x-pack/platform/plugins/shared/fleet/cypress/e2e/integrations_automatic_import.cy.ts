@@ -5,34 +5,34 @@
  * 2.0.
  */
 
-import { deleteIntegrations } from '../tasks/integrations';
 import {
-  UPLOAD_PACKAGE_LINK,
   ASSISTANT_BUTTON,
-  TECH_PREVIEW_BADGE,
-  CREATE_INTEGRATION_LANDING_PAGE,
   BUTTON_FOOTER_NEXT,
-  INTEGRATION_TITLE_INPUT,
-  INTEGRATION_DESCRIPTION_INPUT,
-  DATASTREAM_TITLE_INPUT,
+  CREATE_INTEGRATION_LANDING_PAGE,
   DATASTREAM_DESCRIPTION_INPUT,
   DATASTREAM_NAME_INPUT,
+  DATASTREAM_TITLE_INPUT,
   DATA_COLLECTION_METHOD_INPUT,
-  LOGS_SAMPLE_FILE_PICKER,
   EDIT_PIPELINE_BUTTON,
-  SAVE_PIPELINE_BUTTON,
-  VIEW_INTEGRATION_BUTTON,
+  INTEGRATION_DESCRIPTION_INPUT,
   INTEGRATION_SUCCESS_SECTION,
+  INTEGRATION_TITLE_INPUT,
+  LOGS_SAMPLE_FILE_PICKER,
+  SAVE_PIPELINE_BUTTON,
   SAVE_ZIP_BUTTON,
+  TECH_PREVIEW_BADGE,
+  UPLOAD_PACKAGE_LINK,
+  VIEW_INTEGRATION_BUTTON,
 } from '../screens/integrations_automatic_import';
-import { cleanupAgentPolicies } from '../tasks/cleanup';
-import { login, logout } from '../tasks/login';
 import { createBedrockConnector, deleteConnectors } from '../tasks/api_calls/connectors';
 import {
-  ecsResultsForJson,
   categorizationResultsForJson,
+  ecsResultsForJson,
   relatedResultsForJson,
 } from '../tasks/api_calls/graph_results';
+import { cleanupAgentPolicies } from '../tasks/cleanup';
+import { deleteIntegrations } from '../tasks/integrations';
+import { login, logout } from '../tasks/login';
 
 describe('Add Integration - Automatic Import', () => {
   beforeEach(() => {

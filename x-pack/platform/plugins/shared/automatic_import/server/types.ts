@@ -5,6 +5,10 @@
  * 2.0.
  */
 
+import type {
+  PluginSetupContract as ActionsPluginSetup,
+  PluginStartContract as ActionsPluginStart,
+} from '@kbn/actions-plugin/server/plugin';
 import {
   ActionsClientBedrockChatModel,
   ActionsClientChatOpenAI,
@@ -12,23 +16,19 @@ import {
   ActionsClientSimpleChatModel,
 } from '@kbn/langchain/server';
 import type { LicensingPluginSetup, LicensingPluginStart } from '@kbn/licensing-plugin/server';
-import type {
-  PluginStartContract as ActionsPluginStart,
-  PluginSetupContract as ActionsPluginSetup,
-} from '@kbn/actions-plugin/server/plugin';
-import { ESProcessorItem, SamplesFormat, CelAuthType } from '../common';
+import { CelAuthType, ESProcessorItem, SamplesFormat } from '../common';
 
-export interface IntegrationAssistantPluginSetup {
+export interface AutomaticImportPluginSetup {
   setIsAvailable: (isAvailable: boolean) => void;
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IntegrationAssistantPluginStart {}
+export interface AutomaticImportPluginStart {}
 
-export interface IntegrationAssistantPluginSetupDependencies {
+export interface AutomaticImportPluginSetupDependencies {
   licensing: LicensingPluginSetup;
   actions: ActionsPluginSetup;
 }
-export interface IntegrationAssistantPluginStartDependencies {
+export interface AutomaticImportPluginStartDependencies {
   licensing: LicensingPluginStart;
   actions: ActionsPluginStart;
 }

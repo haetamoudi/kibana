@@ -4,9 +4,13 @@
  * 2.0; you may not use this file except in compliance with the Elastic License
  * 2.0.
  */
+import type { PluginSetupContract as ActionsPluginSetupContract } from '@kbn/actions-plugin/server';
+import type { CloudSetup } from '@kbn/cloud-plugin/server';
 import type { CoreSetup, ElasticsearchClient, Logger, LoggerFactory } from '@kbn/core/server';
-import type { SecurityPluginSetup, SecurityPluginStart } from '@kbn/security-plugin/server';
 import type { FeaturesPluginSetup, FeaturesPluginStart } from '@kbn/features-plugin/server';
+import type { FleetStartContract } from '@kbn/fleet-plugin/server';
+import type { SecurityPluginSetup, SecurityPluginStart } from '@kbn/security-plugin/server';
+import type { SecuritySolutionEssPluginSetup } from '@kbn/security-solution-ess/server';
 import type {
   PluginSetup as SecuritySolutionPluginSetup,
   PluginStart as SecuritySolutionPluginStart,
@@ -15,17 +19,13 @@ import type {
   TaskManagerSetupContract,
   TaskManagerStartContract,
 } from '@kbn/task-manager-plugin/server';
-import type { CloudSetup } from '@kbn/cloud-plugin/server';
-import type { SecuritySolutionEssPluginSetup } from '@kbn/security-solution-ess/server';
-import type { FleetStartContract } from '@kbn/fleet-plugin/server';
-import type { PluginSetupContract as ActionsPluginSetupContract } from '@kbn/actions-plugin/server';
 
+import type { IntegrationAssistantPluginSetup } from '@kbn/automatic-import-plugin/server';
 import type { ServerlessPluginSetup } from '@kbn/serverless/server';
-import type { IntegrationAssistantPluginSetup } from '@kbn/integration-assistant-plugin/server';
 import type { ProductTier } from '../common/product';
 
-import type { ServerlessSecurityConfig } from './config';
 import type { UsageReportingService } from './common/services/usage_reporting_service';
+import type { ServerlessSecurityConfig } from './config';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SecuritySolutionServerlessPluginSetup {}
@@ -41,7 +41,7 @@ export interface SecuritySolutionServerlessPluginSetupDeps {
   taskManager: TaskManagerSetupContract;
   cloud: CloudSetup;
   actions: ActionsPluginSetupContract;
-  integrationAssistant?: IntegrationAssistantPluginSetup;
+  automaticImport?: IntegrationAssistantPluginSetup;
 }
 
 export interface SecuritySolutionServerlessPluginStartDeps {

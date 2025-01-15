@@ -6,27 +6,27 @@
  */
 
 import type {
-  Plugin,
-  PluginInitializerContext,
   CoreSetup,
   CoreStart,
-  Logger,
   CustomRequestHandlerContext,
+  Logger,
+  Plugin,
+  PluginInitializerContext,
 } from '@kbn/core/server';
 import { MINIMUM_LICENSE_TYPE } from '../common/constants';
 import { registerRoutes } from './routes';
 import type {
-  IntegrationAssistantPluginSetup,
-  IntegrationAssistantPluginStart,
-  IntegrationAssistantPluginStartDependencies,
-  IntegrationAssistantPluginSetupDependencies,
+  AutomaticImportPluginSetup,
+  AutomaticImportPluginSetupDependencies,
+  AutomaticImportPluginStart,
+  AutomaticImportPluginStartDependencies,
 } from './types';
 
 export type IntegrationAssistantRouteHandlerContext = CustomRequestHandlerContext<{
   integrationAssistant: {
     getStartServices: CoreSetup<
-      IntegrationAssistantPluginStartDependencies,
-      IntegrationAssistantPluginStart
+      AutomaticImportPluginStartDependencies,
+      AutomaticImportPluginStart
     >['getStartServices'];
     isAvailable: () => boolean;
     logger: Logger;
@@ -36,10 +36,10 @@ export type IntegrationAssistantRouteHandlerContext = CustomRequestHandlerContex
 export class IntegrationAssistantPlugin
   implements
     Plugin<
-      IntegrationAssistantPluginSetup,
-      IntegrationAssistantPluginStart,
-      IntegrationAssistantPluginSetupDependencies,
-      IntegrationAssistantPluginStartDependencies
+      AutomaticImportPluginSetup,
+      AutomaticImportPluginStart,
+      AutomaticImportPluginSetupDependencies,
+      AutomaticImportPluginStartDependencies
     >
 {
   private readonly logger: Logger;
@@ -53,8 +53,8 @@ export class IntegrationAssistantPlugin
   }
 
   public setup(
-    core: CoreSetup<IntegrationAssistantPluginStartDependencies, IntegrationAssistantPluginStart>
-  ): IntegrationAssistantPluginSetup {
+    core: CoreSetup<AutomaticImportPluginStartDependencies, AutomaticImportPluginStart>
+  ): AutomaticImportPluginSetup {
     core.http.registerRouteHandlerContext<
       IntegrationAssistantRouteHandlerContext,
       'integrationAssistant'
@@ -80,8 +80,8 @@ export class IntegrationAssistantPlugin
 
   public start(
     _: CoreStart,
-    dependencies: IntegrationAssistantPluginStartDependencies
-  ): IntegrationAssistantPluginStart {
+    dependencies: AutomaticImportPluginStartDependencies
+  ): AutomaticImportPluginStart {
     this.logger.debug('integrationAssistant api: Started');
     const { licensing } = dependencies;
 

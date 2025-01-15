@@ -7,16 +7,16 @@
 
 import type { Logger } from '@kbn/logging';
 
-import { ProductFeatureKey } from '@kbn/security-solution-features/keys';
 import type { ProductFeatureKeys } from '@kbn/security-solution-features';
+import { ProductFeatureKey } from '@kbn/security-solution-features/keys';
+import { ProductLine } from '../../common/product';
+import type { ServerlessSecurityConfig } from '../config';
+import { enableRuleActions } from '../rules/enable_rule_actions';
+import type { SecuritySolutionServerlessPluginSetupDeps, Tier } from '../types';
+import { getSecurityAssistantProductFeaturesConfigurator } from './assistant_product_features_config';
 import { getAttackDiscoveryProductFeaturesConfigurator } from './attack_discovery_product_features_config';
 import { getCasesProductFeaturesConfigurator } from './cases_product_features_config';
 import { getSecurityProductFeaturesConfigurator } from './security_product_features_config';
-import { getSecurityAssistantProductFeaturesConfigurator } from './assistant_product_features_config';
-import { enableRuleActions } from '../rules/enable_rule_actions';
-import type { ServerlessSecurityConfig } from '../config';
-import type { Tier, SecuritySolutionServerlessPluginSetupDeps } from '../types';
-import { ProductLine } from '../../common/product';
 
 export const registerProductFeatures = (
   pluginsSetup: SecuritySolutionServerlessPluginSetupDeps,
@@ -48,9 +48,9 @@ export const registerProductFeatures = (
     productFeatureKeys: enabledProductFeatureKeys,
   });
 
-  // set availability for the integration assistant plugin based on the product features
-  pluginsSetup.integrationAssistant?.setIsAvailable(
-    enabledProductFeatureKeys.includes(ProductFeatureKey.integrationAssistant)
+  // set availability for the automatic import plugin based on the product features
+  pluginsSetup.automaticImport?.setIsAvailable(
+    enabledProductFeatureKeys.includes(ProductFeatureKey.automaticImport)
   );
 };
 

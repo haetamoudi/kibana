@@ -16,14 +16,6 @@ import type {
   UpsellingSectionId,
 } from '@kbn/security-solution-upselling/service/types';
 import React from 'react';
-import { CloudSecurityPostureIntegrationPliBlockLazy } from './sections/cloud_security_posture';
-import {
-  EndpointAgentTamperProtectionLazy,
-  EndpointCustomNotificationLazy,
-  EndpointPolicyProtectionsLazy,
-  EndpointProtectionUpdatesLazy,
-  RuleDetailsEndpointExceptionsLazy,
-} from './sections/endpoint_management';
 import { getProductTypeByPLI } from './hooks/use_product_type_by_pli';
 import {
   AttackDiscoveryUpsellingPageLazy,
@@ -33,8 +25,16 @@ import {
   OsqueryResponseActionsUpsellingSectionLazy,
   ThreatIntelligencePaywallLazy,
 } from './lazy_upselling';
+import { AutomaticImportLazy } from './sections/automatic_import';
+import { CloudSecurityPostureIntegrationPliBlockLazy } from './sections/cloud_security_posture';
+import {
+  EndpointAgentTamperProtectionLazy,
+  EndpointCustomNotificationLazy,
+  EndpointPolicyProtectionsLazy,
+  EndpointProtectionUpdatesLazy,
+  RuleDetailsEndpointExceptionsLazy,
+} from './sections/endpoint_management';
 import * as i18n from './translations';
-import { IntegrationsAssistantLazy } from './sections/integration_assistant';
 
 interface UpsellingsConfig {
   pli: ProductFeatureKeyType;
@@ -140,11 +140,9 @@ export const upsellingSections: UpsellingSections = [
     ),
   },
   {
-    id: 'integration_assistant',
-    pli: ProductFeatureKey.integrationAssistant,
-    component: () => (
-      <IntegrationsAssistantLazy requiredPLI={ProductFeatureKey.integrationAssistant} />
-    ),
+    id: 'automatic_import',
+    pli: ProductFeatureKey.automaticImport,
+    component: () => <AutomaticImportLazy requiredPLI={ProductFeatureKey.automaticImport} />,
   },
 ];
 

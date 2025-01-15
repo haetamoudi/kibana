@@ -5,7 +5,6 @@
  * 2.0.
  */
 
-import React from 'react';
 import type {
   AppMountParameters,
   AppUpdater,
@@ -16,10 +15,10 @@ import type {
 } from '@kbn/core/public';
 import { DEFAULT_APP_CATEGORIES } from '@kbn/core/public';
 import { i18n } from '@kbn/i18n';
+import React from 'react';
 
-import type { NavigationPublicPluginStart } from '@kbn/navigation-plugin/public';
-import type { IntegrationAssistantPluginStart } from '@kbn/integration-assistant-plugin/public';
 import { ELASTIC_HTTP_VERSION_HEADER } from '@kbn/core-http-common';
+import type { NavigationPublicPluginStart } from '@kbn/navigation-plugin/public';
 
 import type {
   CustomIntegrationsSetup,
@@ -30,9 +29,9 @@ import type { SharePluginStart } from '@kbn/share-plugin/public';
 
 import { once } from 'lodash';
 
-import type { SpacesPluginStart } from '@kbn/spaces-plugin/public';
-import type { DiscoverStart } from '@kbn/discover-plugin/public';
 import type { CloudSetup, CloudStart } from '@kbn/cloud-plugin/public';
+import type { DiscoverStart } from '@kbn/discover-plugin/public';
+import type { SpacesPluginStart } from '@kbn/spaces-plugin/public';
 import type {
   UsageCollectionSetup,
   UsageCollectionStart,
@@ -40,15 +39,15 @@ import type {
 
 import type { DataPublicPluginSetup, DataPublicPluginStart } from '@kbn/data-plugin/public';
 import type { DataViewsPublicPluginStart } from '@kbn/data-views-plugin/public';
+import type { GlobalSearchPluginSetup } from '@kbn/global-search-plugin/public';
 import type { HomePublicPluginSetup } from '@kbn/home-plugin/public';
 import { Storage } from '@kbn/kibana-utils-plugin/public';
 import type { LicensingPluginStart } from '@kbn/licensing-plugin/public';
-import type { GlobalSearchPluginSetup } from '@kbn/global-search-plugin/public';
 
 import type { SendRequestResponse } from '@kbn/es-ui-shared-plugin/public';
 
-import type { UnifiedSearchPublicPluginStart } from '@kbn/unified-search-plugin/public';
 import type { GuidedOnboardingPluginStart } from '@kbn/guided-onboarding-plugin/public';
+import type { UnifiedSearchPublicPluginStart } from '@kbn/unified-search-plugin/public';
 
 import type { DashboardStart } from '@kbn/dashboard-plugin/public';
 
@@ -71,23 +70,23 @@ import type {
 
 import { API_VERSIONS } from '../common/constants';
 
+import { TutorialDirectoryHeaderLink, TutorialModuleNotice } from './components/home_integration';
 import { CUSTOM_LOGS_INTEGRATION_NAME, INTEGRATIONS_BASE_PATH } from './constants';
+import { getFleetDeepLinks } from './deep_links';
 import type { RequestError } from './hooks';
 import { licenseService, sendGetBulkAssets } from './hooks';
 import { setHttpClient } from './hooks/use_request';
+import { LazyCustomLogsAssetsExtension } from './lazy_custom_logs_assets_extension';
 import { createPackageSearchProvider } from './search_provider';
-import { TutorialDirectoryHeaderLink, TutorialModuleNotice } from './components/home_integration';
-import { createExtensionRegistrationCallback } from './services/ui_extensions';
+import { setCustomIntegrations, setCustomIntegrationsStart } from './services/custom_integrations';
 import { ExperimentalFeaturesService } from './services/experimental_features';
+import { createExtensionRegistrationCallback } from './services/ui_extensions';
 import type {
   GetBulkAssetsRequest,
   GetBulkAssetsResponse,
   UIExtensionRegistrationCallback,
   UIExtensionsStorage,
 } from './types';
-import { LazyCustomLogsAssetsExtension } from './lazy_custom_logs_assets_extension';
-import { setCustomIntegrations, setCustomIntegrationsStart } from './services/custom_integrations';
-import { getFleetDeepLinks } from './deep_links';
 
 export type { FleetConfigType } from '../common/types';
 
@@ -132,7 +131,7 @@ export interface FleetStartDeps {
   navigation: NavigationPublicPluginStart;
   customIntegrations: CustomIntegrationsStart;
   share: SharePluginStart;
-  integrationAssistant?: IntegrationAssistantPluginStart;
+  integrationAssistant?: AutomaticImportPluginStart;
   cloud?: CloudStart;
   usageCollection?: UsageCollectionStart;
   guidedOnboarding?: GuidedOnboardingPluginStart;
@@ -142,7 +141,7 @@ export interface FleetStartServices extends CoreStart, Exclude<FleetStartDeps, '
   storage: Storage;
   share: SharePluginStart;
   dashboard: DashboardStart;
-  integrationAssistant?: IntegrationAssistantPluginStart;
+  integrationAssistant?: AutomaticImportPluginStart;
   cloud?: CloudSetup & CloudStart;
   discover?: DiscoverStart;
   spaces?: SpacesPluginStart;

@@ -5,16 +5,16 @@
  * 2.0.
  */
 
+import type { AutomaticImportPluginStart } from '@kbn/automatic_import/public';
+import type { CloudStart } from '@kbn/cloud-plugin/public';
+import type { DiscoverSetup } from '@kbn/discover-plugin/public';
+import type { ManagementSetup, ManagementStart } from '@kbn/management-plugin/public';
 import type { SecurityPluginSetup, SecurityPluginStart } from '@kbn/security-plugin/public';
 import type {
   PluginSetup as SecuritySolutionPluginSetup,
   PluginStart as SecuritySolutionPluginStart,
 } from '@kbn/security-solution-plugin/public';
 import type { ServerlessPluginSetup, ServerlessPluginStart } from '@kbn/serverless/public';
-import type { ManagementSetup, ManagementStart } from '@kbn/management-plugin/public';
-import type { CloudStart } from '@kbn/cloud-plugin/public';
-import type { DiscoverSetup } from '@kbn/discover-plugin/public';
-import type { IntegrationAssistantPluginStart } from '@kbn/integration-assistant-plugin/public';
 import type { ServerlessSecurityConfigSchema } from '../common/config';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -37,7 +37,7 @@ export interface SecuritySolutionServerlessPluginStartDeps {
   serverless: ServerlessPluginStart;
   management: ManagementStart;
   cloud: CloudStart;
-  integrationAssistant?: IntegrationAssistantPluginStart;
+  automaticImport?: AutomaticImportPluginStart;
 }
 
 export type ServerlessSecurityPublicConfig = Pick<

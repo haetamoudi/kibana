@@ -1,4 +1,4 @@
-# Integration Assistant
+# Automatic Import
 
 ## Overview
 

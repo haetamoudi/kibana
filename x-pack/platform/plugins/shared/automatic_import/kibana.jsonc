@@ -1,12 +1,12 @@
 {
   "type": "plugin",
-  "id": "@kbn/integration-assistant-plugin",
+  "id": "@kbn/automatic_import-plugin",
   "owner": "@elastic/security-scalability",
   "group": "platform",
   "visibility": "shared",
-  "description": "Plugin implementing the Integration Assistant API and UI",
+  "description": "Plugin implementing the Automatic Import API and UI",
   "plugin": {
-    "id": "integrationAssistant",
+    "id": "automaticImport",
     "server": true,
     "browser": true,
     "configPath": ["xpack", "automatic_import"],

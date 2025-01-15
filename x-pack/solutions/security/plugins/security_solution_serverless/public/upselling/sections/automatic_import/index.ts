@@ -7,8 +7,8 @@
 
 import { lazy } from 'react';
 
-export const IntegrationsAssistantLazy = lazy(() =>
-  import('./integration_assistant').then(({ IntegrationsAssistant }) => ({
-    default: IntegrationsAssistant,
+export const AutomaticImportLazy = lazy(() =>
+  import('./automatic_import').then(({ AutomaticImport }) => ({
+    default: AutomaticImport,
   }))
 );

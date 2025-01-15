@@ -5,8 +5,8 @@
  * 2.0.
  */
 
-import { ProductFeatureSecurityKey, SecuritySubFeatureId } from '../product_features_keys';
 import { APP_ID } from '../constants';
+import { ProductFeatureSecurityKey, SecuritySubFeatureId } from '../product_features_keys';
 import type { DefaultSecurityProductFeaturesConfig } from './types';
 
 /**
@@ -134,5 +134,5 @@ export const securityDefaultProductFeaturesConfig: DefaultSecurityProductFeature
   [ProductFeatureSecurityKey.cloudSecurityPosture]: {},
 
   // Security PLIs
-  [ProductFeatureSecurityKey.integrationAssistant]: {},
+  [ProductFeatureSecurityKey.automaticImport]: {},
 };

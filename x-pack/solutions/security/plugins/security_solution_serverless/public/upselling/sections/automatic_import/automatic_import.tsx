@@ -4,49 +4,49 @@
  * 2.0; you may not use this file except in compliance with the Elastic License
  * 2.0.
  */
-import React from 'react';
 import {
   EuiCard,
-  EuiIcon,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiIcon,
+  EuiSpacer,
   EuiText,
   EuiTextColor,
-  EuiSpacer,
 } from '@elastic/eui';
 import { i18n } from '@kbn/i18n';
 import type { ProductFeatureKeyType } from '@kbn/security-solution-features';
+import React from 'react';
 import { useProductTypeByPLI } from '../../hooks/use_product_type_by_pli';
 
 export const UPGRADE_PRODUCT_MESSAGE = (requiredProductType: string) =>
   i18n.translate(
-    'xpack.securitySolutionServerless.upselling.integrationAssistant.upgradeProductMessage',
+    'xpack.securitySolutionServerless.upselling.automaticImport.upgradeProductMessage',
     {
       defaultMessage:
-        'To turn on the Integration Assistant feature, you must upgrade the product tier to {requiredProductType}',
+        'To turn on the Automatic Import feature, you must upgrade the product tier to {requiredProductType}',
       values: {
         requiredProductType,
       },
     }
   );
 export const TIER_REQUIRED = (requiredProductType: string) =>
-  i18n.translate('xpack.securitySolutionServerless.upselling.integrationAssistant.tierRequired', {
+  i18n.translate('xpack.securitySolutionServerless.upselling.automaticImport.tierRequired', {
     defaultMessage: '{requiredProductType} tier required',
     values: {
       requiredProductType,
     },
   });
 export const CONTACT_ADMINISTRATOR = i18n.translate(
-  'xpack.securitySolutionServerless.upselling.integrationAssistant.contactAdministrator',
+  'xpack.securitySolutionServerless.upselling.automaticImport.contactAdministrator',
   {
     defaultMessage: 'Contact your administrator for assistance.',
   }
 );
 
-export interface IntegrationsAssistantProps {
+export interface AutomaticImportProps {
   requiredPLI: ProductFeatureKeyType;
 }
-export const IntegrationsAssistant = React.memo<IntegrationsAssistantProps>(({ requiredPLI }) => {
+export const AutomaticImport = React.memo<AutomaticImportProps>(({ requiredPLI }) => {
   const requiredProductType = useProductTypeByPLI(requiredPLI);
   return (
     <>
@@ -84,4 +84,4 @@ export const IntegrationsAssistant = React.memo<IntegrationsAssistantProps>(({ r
     </>
   );
 });
-IntegrationsAssistant.displayName = 'IntegrationsAssistant';
+AutomaticImport.displayName = 'AutomaticImport';

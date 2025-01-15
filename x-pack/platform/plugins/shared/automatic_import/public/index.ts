@@ -7,7 +7,7 @@
 
 import type { PluginInitializerContext } from '@kbn/core/public';
 import { IntegrationAssistantPlugin } from './plugin';
-export type { IntegrationAssistantPluginSetup, IntegrationAssistantPluginStart } from './types';
+export type { AutomaticImportPluginSetup, AutomaticImportPluginStart } from './types';
 
 export function plugin(initializerContext: PluginInitializerContext) {
   return new IntegrationAssistantPlugin(initializerContext);

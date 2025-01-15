@@ -5,27 +5,27 @@
  * 2.0.
  */
 
-import type { CoreStart, Plugin, CoreSetup, PluginInitializerContext } from '@kbn/core/public';
+import type { CoreSetup, CoreStart, Plugin, PluginInitializerContext } from '@kbn/core/public';
 import { BehaviorSubject } from 'rxjs';
-import type {
-  IntegrationAssistantPluginSetup,
-  IntegrationAssistantPluginStart,
-  IntegrationAssistantPluginStartDependencies,
-} from './types';
+import type { ExperimentalFeatures } from '../common/experimental_features';
+import { parseExperimentalConfigValue } from '../common/experimental_features';
+import { type IntegrationAssistantConfigType } from '../server/config';
 import { getCreateIntegrationLazy } from './components/create_integration';
 import { getCreateIntegrationCardButtonLazy } from './components/create_integration_card_button';
 import {
-  Telemetry,
   ExperimentalFeaturesService,
-  type Services,
+  Telemetry,
   type RenderUpselling,
+  type Services,
 } from './services';
-import { parseExperimentalConfigValue } from '../common/experimental_features';
-import type { ExperimentalFeatures } from '../common/experimental_features';
-import { type IntegrationAssistantConfigType } from '../server/config';
+import type {
+  AutomaticImportPluginSetup,
+  AutomaticImportPluginStart,
+  IntegrationAssistantPluginStartDependencies,
+} from './types';
 
 export class IntegrationAssistantPlugin
-  implements Plugin<IntegrationAssistantPluginSetup, IntegrationAssistantPluginStart>
+  implements Plugin<AutomaticImportPluginSetup, AutomaticImportPluginStart>
 {
   private telemetry = new Telemetry();
   private renderUpselling$ = new BehaviorSubject<RenderUpselling | undefined>(undefined);
@@ -38,7 +38,7 @@ export class IntegrationAssistantPlugin
     ExperimentalFeaturesService.init(this.experimentalFeatures);
   }
 
-  public setup(core: CoreSetup): IntegrationAssistantPluginSetup {
+  public setup(core: CoreSetup): AutomaticImportPluginSetup {
     this.telemetry.setup(core.analytics);
     this.config = this.config;
     return {};
@@ -47,7 +47,7 @@ export class IntegrationAssistantPlugin
   public start(
     core: CoreStart,
     dependencies: IntegrationAssistantPluginStartDependencies
-  ): IntegrationAssistantPluginStart {
+  ): AutomaticImportPluginStart {
     const services: Services = {
       ...core,
       ...dependencies,

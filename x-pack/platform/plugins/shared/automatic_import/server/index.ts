@@ -14,4 +14,4 @@ export async function plugin(initializerContext: PluginInitializerContext) {
   return new IntegrationAssistantPlugin(initializerContext);
 }
 
-export type { IntegrationAssistantPluginSetup, IntegrationAssistantPluginStart } from './types';
+export type { AutomaticImportPluginSetup, AutomaticImportPluginStart } from './types';

@@ -87,7 +87,7 @@ export enum ProductFeatureSecurityKey {
   /**
    * enables the integration assistant
    */
-  integrationAssistant = 'integration_assistant',
+  automaticImport = 'automatic_import',
 
   /** Enables Endpoint Workflow Insights */
   securityWorkflowInsights = 'security_workflow_insights',
