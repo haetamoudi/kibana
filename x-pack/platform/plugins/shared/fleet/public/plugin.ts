@@ -70,7 +70,7 @@ import type {
 
 import { API_VERSIONS } from '../common/constants';
 
-import { AutomaticImportPluginStart } from '@kbn/automatic-import-plugin/server/types';
+import { AutomaticImportPluginStart } from '@kbn/automatic-import-plugin/public/types';
 import { TutorialDirectoryHeaderLink, TutorialModuleNotice } from './components/home_integration';
 import { CUSTOM_LOGS_INTEGRATION_NAME, INTEGRATIONS_BASE_PATH } from './constants';
 import { getFleetDeepLinks } from './deep_links';
