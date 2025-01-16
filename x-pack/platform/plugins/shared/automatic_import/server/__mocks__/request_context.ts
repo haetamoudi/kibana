@@ -4,14 +4,14 @@
  * 2.0; you may not use this file except in compliance with the Elastic License
  * 2.0.
  */
-import { coreMock } from '@kbn/core/server/mocks';
 import type { PluginStartContract as ActionsPluginStart } from '@kbn/actions-plugin/server';
-import { loggerMock } from '@kbn/logging-mocks';
-import { FakeLLM } from '@langchain/core/utils/testing';
+import { coreMock } from '@kbn/core/server/mocks';
 import {
   ActionsClientChatOpenAI,
   ActionsClientSimpleChatModel,
 } from '@kbn/langchain/server/language_models';
+import { loggerMock } from '@kbn/logging-mocks';
+import { FakeLLM } from '@langchain/core/utils/testing';
 
 export const createMockClients = () => {
   const core = coreMock.createRequestHandlerContext();
@@ -61,7 +61,7 @@ const actions = {
 const coreSetupMock = coreMock.createSetup();
 const createRequestContextMock = (clients: MockClients = createMockClients()) => {
   return {
-    integrationAssistant: {
+    automaticImport: {
       getStartServices: (coreSetupMock.getStartServices as jest.Mock).mockImplementation(
         async () => {
           return [

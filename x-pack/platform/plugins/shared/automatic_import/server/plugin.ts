@@ -22,8 +22,8 @@ import type {
   AutomaticImportPluginStartDependencies,
 } from './types';
 
-export type IntegrationAssistantRouteHandlerContext = CustomRequestHandlerContext<{
-  integrationAssistant: {
+export type AutomaticImportRouteHandlerContext = CustomRequestHandlerContext<{
+  automaticImport: {
     getStartServices: CoreSetup<
       AutomaticImportPluginStartDependencies,
       AutomaticImportPluginStart
@@ -33,7 +33,7 @@ export type IntegrationAssistantRouteHandlerContext = CustomRequestHandlerContex
   };
 }>;
 
-export class IntegrationAssistantPlugin
+export class AutomaticImportPlugin
   implements
     Plugin<
       AutomaticImportPluginSetup,
@@ -55,17 +55,17 @@ export class IntegrationAssistantPlugin
   public setup(
     core: CoreSetup<AutomaticImportPluginStartDependencies, AutomaticImportPluginStart>
   ): AutomaticImportPluginSetup {
-    core.http.registerRouteHandlerContext<
-      IntegrationAssistantRouteHandlerContext,
-      'integrationAssistant'
-    >('integrationAssistant', () => ({
-      getStartServices: core.getStartServices,
-      isAvailable: () => this.isAvailable && this.hasLicense,
-      logger: this.logger,
-    }));
-    const router = core.http.createRouter<IntegrationAssistantRouteHandlerContext>();
+    core.http.registerRouteHandlerContext<AutomaticImportRouteHandlerContext, 'automaticImport'>(
+      'automaticImport',
+      () => ({
+        getStartServices: core.getStartServices,
+        isAvailable: () => this.isAvailable && this.hasLicense,
+        logger: this.logger,
+      })
+    );
+    const router = core.http.createRouter<AutomaticImportRouteHandlerContext>();
 
-    this.logger.debug('integrationAssistant api: Setup');
+    this.logger.debug('automaticImport api: Setup');
 
     registerRoutes(router);
 
@@ -82,7 +82,7 @@ export class IntegrationAssistantPlugin
     _: CoreStart,
     dependencies: AutomaticImportPluginStartDependencies
   ): AutomaticImportPluginStart {
-    this.logger.debug('integrationAssistant api: Started');
+    this.logger.debug('automaticImport api: Started');
     const { licensing } = dependencies;
 
     licensing.license$.subscribe((license) => {

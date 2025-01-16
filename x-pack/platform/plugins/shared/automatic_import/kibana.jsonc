@@ -1,6 +1,6 @@
 {
   "type": "plugin",
-  "id": "@kbn/automatic_import-plugin",
+  "id": "@kbn/automatic-import-plugin",
   "owner": "@elastic/security-scalability",
   "group": "platform",
   "visibility": "shared",

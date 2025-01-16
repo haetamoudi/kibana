@@ -10,6 +10,7 @@ import { getRequestAbortedSignal } from '@kbn/data-plugin/server';
 import { APMTracer } from '@kbn/langchain/server/tracers/apm';
 import { getLangSmithTracer } from '@kbn/langchain/server/tracers/langsmith';
 import { ANALYZE_LOGS_PATH, AnalyzeLogsRequestBody, AnalyzeLogsResponse } from '../../common';
+import { GenerationErrorCode } from '../../common/constants';
 import {
   ACTIONS_AND_CONNECTORS_ALL_ROLE,
   FLEET_ALL_ROLE,
@@ -17,18 +18,15 @@ import {
   ROUTE_HANDLER_TIMEOUT,
 } from '../constants';
 import { getLogFormatDetectionGraph } from '../graphs/log_type_detection/graph';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
+import { isErrorThatHandlesItsOwnResponse, UnsupportedLogFormatError } from '../lib/errors';
+import { CefError } from '../lib/errors/cef_error';
+import type { AutomaticImportRouteHandlerContext } from '../plugin';
 import { getLLMClass, getLLMType } from '../util/llm';
 import { buildRouteValidationWithZod } from '../util/route_validation';
-import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse, UnsupportedLogFormatError } from '../lib/errors';
 import { handleCustomErrors } from './routes_util';
-import { GenerationErrorCode } from '../../common/constants';
-import { CefError } from '../lib/errors/cef_error';
+import { withAvailability } from './with_availability';
 
-export function registerAnalyzeLogsRoutes(
-  router: IRouter<IntegrationAssistantRouteHandlerContext>
-) {
+export function registerAnalyzeLogsRoutes(router: IRouter<AutomaticImportRouteHandlerContext>) {
   router.versioned
     .post({
       path: ANALYZE_LOGS_PATH,
@@ -68,7 +66,7 @@ export function registerAnalyzeLogsRoutes(
         } = req.body;
         const services = await context.resolve(['core']);
         const { client } = services.core.elasticsearch;
-        const { getStartServices, logger } = await context.integrationAssistant;
+        const { getStartServices, logger } = await context.automaticImport;
         const [, { actions: actionsPlugin }] = await getStartServices();
         try {
           const actionsClient = await actionsPlugin.getActionsClientWithRequest(req);

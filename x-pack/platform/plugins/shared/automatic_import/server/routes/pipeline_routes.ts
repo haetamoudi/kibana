@@ -6,22 +6,22 @@
  */
 
 import type { IKibanaResponse, IRouter } from '@kbn/core/server';
-import { CheckPipelineRequestBody, CheckPipelineResponse, CHECK_PIPELINE_PATH } from '../../common';
+import { CHECK_PIPELINE_PATH, CheckPipelineRequestBody, CheckPipelineResponse } from '../../common';
+import { GenerationErrorCode } from '../../common/constants';
 import {
   ACTIONS_AND_CONNECTORS_ALL_ROLE,
   FLEET_ALL_ROLE,
   INTEGRATIONS_ALL_ROLE,
   ROUTE_HANDLER_TIMEOUT,
 } from '../constants';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
+import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
+import { AutomaticImportRouteHandlerContext } from '../plugin';
 import { testPipeline } from '../util/pipeline';
 import { buildRouteValidationWithZod } from '../util/route_validation';
-import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
 import { handleCustomErrors } from './routes_util';
-import { GenerationErrorCode } from '../../common/constants';
+import { withAvailability } from './with_availability';
 
-export function registerPipelineRoutes(router: IRouter<IntegrationAssistantRouteHandlerContext>) {
+export function registerPipelineRoutes(router: IRouter<AutomaticImportRouteHandlerContext>) {
   router.versioned
     .post({
       path: CHECK_PIPELINE_PATH,

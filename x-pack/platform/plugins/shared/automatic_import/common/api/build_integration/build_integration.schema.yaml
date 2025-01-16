@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Integration Assistatnt Build Integrarion API endpoint
-  version: "1"
+  title: Automatic Import Build Integration API endpoint
+  version: '1'
 paths:
   /internal/automatic_import/build:
     post:
@@ -21,7 +21,7 @@ paths:
                 - integration
               properties:
                 integration:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Integration"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Integration'
       responses:
         200:
           description: Indicates a successful call.

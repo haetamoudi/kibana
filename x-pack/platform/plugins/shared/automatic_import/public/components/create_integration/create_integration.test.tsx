@@ -5,15 +5,15 @@
  * 2.0.
  */
 
+import { render } from '@testing-library/react';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
-import { TestProvider } from '../../mocks/test_provider';
-import { CreateIntegration } from './create_integration';
-import { mockServices } from '../../services/mocks/services';
 import { useRoutesAuthorization } from '../../common/hooks/use_authorization';
 import { useIsAvailable } from '../../common/hooks/use_availability';
+import { TestProvider } from '../../mocks/test_provider';
+import { mockServices } from '../../services/mocks/services';
+import { CreateIntegration } from './create_integration';
 
 jest.mock('../../common/hooks/use_authorization');
 jest.mock('../../common/hooks/use_availability');
@@ -26,8 +26,8 @@ jest.mock('./create_integration_landing', () => ({
 jest.mock('./create_integration_upload', () => ({
   CreateIntegrationUpload: jest.fn(() => <div data-test-subj="uploadMock" />),
 }));
-jest.mock('./create_integration_assistant', () => ({
-  CreateIntegrationAssistant: jest.fn(() => <div data-test-subj="assistantMock" />),
+jest.mock('./create_automatic_import', () => ({
+  CreateAutomaticImport: jest.fn(() => <div data-test-subj="assistantMock" />),
 }));
 
 const getWrapper = (pathname: string): React.FC<PropsWithChildren<{}>> =>
@@ -56,7 +56,7 @@ describe('CreateIntegration', () => {
     describe('and user is not authorized', () => {
       beforeEach(() => {
         mockUseRoutesAuthorization.mockReturnValueOnce({
-          canUseIntegrationAssistant: false,
+          canUseAutomaticImport: false,
           canUseIntegrationUpload: false,
         });
       });
@@ -94,7 +94,7 @@ describe('CreateIntegration', () => {
     describe('and user is not authorized', () => {
       beforeEach(() => {
         mockUseRoutesAuthorization.mockReturnValueOnce({
-          canUseIntegrationAssistant: false,
+          canUseAutomaticImport: false,
           canUseIntegrationUpload: true,
         });
       });
@@ -134,7 +134,7 @@ describe('CreateIntegration', () => {
     describe('and user is not authorized', () => {
       beforeEach(() => {
         mockUseRoutesAuthorization.mockReturnValueOnce({
-          canUseIntegrationAssistant: true,
+          canUseAutomaticImport: true,
           canUseIntegrationUpload: false,
         });
       });

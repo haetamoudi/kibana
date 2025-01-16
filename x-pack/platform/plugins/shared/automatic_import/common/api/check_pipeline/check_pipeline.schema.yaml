@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Integration Assistatnt Check Pipeline API endpoint
-  version: "1"
+  title: Automatic Import Check Pipeline API endpoint
+  version: '1'
 paths:
   /internal/automatic_import/pipeline:
     post:
@@ -22,13 +22,13 @@ paths:
                 - pipeline
               properties:
                 rawSamples:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/RawSamples"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/RawSamples'
                 pipeline:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Pipeline"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Pipeline'
       responses:
         200:
           description: Indicates a successful call.
           content:
             application/json:
               schema:
-                $ref: "../model/response_schemas.schema.yaml#/components/schemas/CheckPipelineAPIResponse"
+                $ref: '../model/response_schemas.schema.yaml#/components/schemas/CheckPipelineAPIResponse'

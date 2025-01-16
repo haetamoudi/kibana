@@ -5,17 +5,17 @@
  * 2.0.
  */
 
-import React from 'react';
 import { EuiFlexGroup, EuiFlexItem, EuiIcon, EuiLink, EuiSpacer, EuiText } from '@elastic/eui';
-import { KibanaPageTemplate } from '@kbn/shared-ux-page-kibana-template';
 import { FormattedMessage } from '@kbn/i18n-react';
+import { KibanaPageTemplate } from '@kbn/shared-ux-page-kibana-template';
+import React from 'react';
 import { AuthorizationWrapper } from '../../../common/components/authorization';
 import { AvailabilityWrapper } from '../../../common/components/availability_wrapper';
-import { IntegrationImageHeader } from '../../../common/components/integration_image_header';
 import { ButtonsFooter } from '../../../common/components/buttons_footer';
+import { IntegrationImageHeader } from '../../../common/components/integration_image_header';
 import { SectionWrapper } from '../../../common/components/section_wrapper';
-import { useNavigate, Page } from '../../../common/hooks/use_navigate';
-import { IntegrationAssistantCard } from './integration_assistant_card';
+import { Page, useNavigate } from '../../../common/hooks/use_navigate';
+import { AutomaticImportCard } from './automatic_import_card';
 import * as i18n from './translations';
 
 export const CreateIntegrationLanding = React.memo(() => {
@@ -35,7 +35,7 @@ export const CreateIntegrationLanding = React.memo(() => {
               >
                 <EuiFlexItem>
                   <EuiSpacer size="l" />
-                  <IntegrationAssistantCard />
+                  <AutomaticImportCard />
                 </EuiFlexItem>
                 <EuiFlexItem>
                   <EuiFlexGroup
@@ -50,7 +50,7 @@ export const CreateIntegrationLanding = React.memo(() => {
                     <EuiFlexItem>
                       <EuiText size="s" color="subdued">
                         <FormattedMessage
-                          id="xpack.integrationAssistant.createIntegrationLanding.uploadPackageDescription"
+                          id="xpack.automaticImport.createIntegrationLanding.uploadPackageDescription"
                           defaultMessage="If you have an existing integration package, {link}"
                           values={{
                             link: (
@@ -59,7 +59,7 @@ export const CreateIntegrationLanding = React.memo(() => {
                                 data-test-subj="uploadPackageLink"
                               >
                                 <FormattedMessage
-                                  id="xpack.integrationAssistant.createIntegrationLanding.uploadPackageLink"
+                                  id="xpack.automaticImport.createIntegrationLanding.uploadPackageLink"
                                   defaultMessage="upload it as a .zip"
                                 />
                               </EuiLink>

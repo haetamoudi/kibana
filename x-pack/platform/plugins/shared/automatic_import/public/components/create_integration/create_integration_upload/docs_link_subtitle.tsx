@@ -5,23 +5,23 @@
  * 2.0.
  */
 
-import React from 'react';
-import { useKibana } from '@kbn/kibana-react-plugin/public';
+import { EuiLink, EuiText } from '@elastic/eui';
 import { FormattedMessage } from '@kbn/i18n-react';
-import { EuiText, EuiLink } from '@elastic/eui';
+import { useKibana } from '@kbn/kibana-react-plugin/public';
+import React from 'react';
 
 export const DocsLinkSubtitle = React.memo(() => {
   const { docLinks } = useKibana().services;
   return (
     <EuiText size="s" color="subdued">
       <FormattedMessage
-        id="xpack.integrationAssistant.createIntegrationUpload.uploadHelpText"
+        id="xpack.automaticImport.createIntegrationUpload.uploadHelpText"
         defaultMessage="For more information, refer to {link}"
         values={{
           link: (
             <EuiLink href={docLinks?.links.integrationDeveloper.upload} target="_blank">
               <FormattedMessage
-                id="xpack.integrationAssistant.createIntegrationUpload.documentation"
+                id="xpack.automaticImport.createIntegrationUpload.documentation"
                 defaultMessage="Upload an Integration"
               />
             </EuiLink>

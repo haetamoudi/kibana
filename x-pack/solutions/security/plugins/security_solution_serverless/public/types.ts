@@ -5,7 +5,7 @@
  * 2.0.
  */
 
-import type { AutomaticImportPluginStart } from '@kbn/automatic_import/public';
+import { AutomaticImportPluginStart } from '@kbn/automatic-import-plugin/server';
 import type { CloudStart } from '@kbn/cloud-plugin/public';
 import type { DiscoverSetup } from '@kbn/discover-plugin/public';
 import type { ManagementSetup, ManagementStart } from '@kbn/management-plugin/public';

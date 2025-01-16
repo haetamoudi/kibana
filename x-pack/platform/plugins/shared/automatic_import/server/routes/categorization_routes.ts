@@ -14,6 +14,7 @@ import {
   CategorizationRequestBody,
   CategorizationResponse,
 } from '../../common';
+import { CATEGORIZATION_RECURSION_LIMIT, GenerationErrorCode } from '../../common/constants';
 import {
   ACTIONS_AND_CONNECTORS_ALL_ROLE,
   FLEET_ALL_ROLE,
@@ -21,17 +22,14 @@ import {
   ROUTE_HANDLER_TIMEOUT,
 } from '../constants';
 import { getCategorizationGraph } from '../graphs/categorization';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
+import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
+import type { AutomaticImportRouteHandlerContext } from '../plugin';
 import { getLLMClass, getLLMType } from '../util/llm';
 import { buildRouteValidationWithZod } from '../util/route_validation';
-import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
 import { handleCustomErrors } from './routes_util';
-import { CATEGORIZATION_RECURSION_LIMIT, GenerationErrorCode } from '../../common/constants';
+import { withAvailability } from './with_availability';
 
-export function registerCategorizationRoutes(
-  router: IRouter<IntegrationAssistantRouteHandlerContext>
-) {
+export function registerCategorizationRoutes(router: IRouter<AutomaticImportRouteHandlerContext>) {
   router.versioned
     .post({
       path: CATEGORIZATION_GRAPH_PATH,
@@ -72,7 +70,7 @@ export function registerCategorizationRoutes(
           } = req.body;
           const services = await context.resolve(['core']);
           const { client } = services.core.elasticsearch;
-          const { getStartServices, logger } = await context.integrationAssistant;
+          const { getStartServices, logger } = await context.automaticImport;
           const [, { actions: actionsPlugin }] = await getStartServices();
 
           try {

@@ -7,20 +7,20 @@
 
 import type { IRouter } from '@kbn/core/server';
 import { BuildIntegrationRequestBody, INTEGRATION_BUILDER_PATH } from '../../common';
-import { buildPackage } from '../integration_builder';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
-import { buildRouteValidationWithZod } from '../util/route_validation';
-import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
-import { handleCustomErrors } from './routes_util';
 import { GenerationErrorCode } from '../../common/constants';
 import {
   ACTIONS_AND_CONNECTORS_ALL_ROLE,
   FLEET_ALL_ROLE,
   INTEGRATIONS_ALL_ROLE,
 } from '../constants';
+import { buildPackage } from '../integration_builder';
+import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
+import type { AutomaticImportRouteHandlerContext } from '../plugin';
+import { buildRouteValidationWithZod } from '../util/route_validation';
+import { handleCustomErrors } from './routes_util';
+import { withAvailability } from './with_availability';
 export function registerIntegrationBuilderRoutes(
-  router: IRouter<IntegrationAssistantRouteHandlerContext>
+  router: IRouter<AutomaticImportRouteHandlerContext>
 ) {
   router.versioned
     .post({

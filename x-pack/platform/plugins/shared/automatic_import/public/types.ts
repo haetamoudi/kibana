@@ -40,7 +40,7 @@ export interface AutomaticImportPluginSetupDependencies {
   licensing: LicensingPluginSetup;
 }
 
-export interface IntegrationAssistantPluginStartDependencies {
+export interface AutomaticImportPluginStartDependencies {
   triggersActionsUi: TriggersAndActionsUIPublicPluginStart;
   licensing: LicensingPluginStart;
 }

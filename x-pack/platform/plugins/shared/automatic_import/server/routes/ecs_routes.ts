@@ -10,6 +10,7 @@ import { getRequestAbortedSignal } from '@kbn/data-plugin/server';
 import { APMTracer } from '@kbn/langchain/server/tracers/apm';
 import { getLangSmithTracer } from '@kbn/langchain/server/tracers/langsmith';
 import { ECS_GRAPH_PATH, EcsMappingRequestBody, EcsMappingResponse } from '../../common';
+import { GenerationErrorCode } from '../../common/constants';
 import {
   ACTIONS_AND_CONNECTORS_ALL_ROLE,
   FLEET_ALL_ROLE,
@@ -17,15 +18,14 @@ import {
   ROUTE_HANDLER_TIMEOUT,
 } from '../constants';
 import { getEcsGraph } from '../graphs/ecs';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
+import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
+import type { AutomaticImportRouteHandlerContext } from '../plugin';
 import { getLLMClass, getLLMType } from '../util/llm';
 import { buildRouteValidationWithZod } from '../util/route_validation';
-import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
 import { handleCustomErrors } from './routes_util';
-import { GenerationErrorCode } from '../../common/constants';
+import { withAvailability } from './with_availability';
 
-export function registerEcsRoutes(router: IRouter<IntegrationAssistantRouteHandlerContext>) {
+export function registerEcsRoutes(router: IRouter<AutomaticImportRouteHandlerContext>) {
   router.versioned
     .post({
       path: ECS_GRAPH_PATH,
@@ -64,7 +64,7 @@ export function registerEcsRoutes(router: IRouter<IntegrationAssistantRouteHandl
           mapping,
           langSmithOptions,
         } = req.body;
-        const { getStartServices, logger } = await context.integrationAssistant;
+        const { getStartServices, logger } = await context.automaticImport;
 
         const [, { actions: actionsPlugin }] = await getStartServices();
         try {

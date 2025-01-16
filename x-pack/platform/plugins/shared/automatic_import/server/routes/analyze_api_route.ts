@@ -17,15 +17,13 @@ import {
   ROUTE_HANDLER_TIMEOUT,
 } from '../constants';
 import { getApiAnalysisGraph } from '../graphs/api_analysis';
-import type { IntegrationAssistantRouteHandlerContext } from '../plugin';
+import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
+import type { AutomaticImportRouteHandlerContext } from '../plugin';
 import { getLLMClass, getLLMType } from '../util/llm';
 import { buildRouteValidationWithZod } from '../util/route_validation';
 import { withAvailability } from './with_availability';
-import { isErrorThatHandlesItsOwnResponse } from '../lib/errors';
 
-export function registerApiAnalysisRoutes(
-  router: IRouter<IntegrationAssistantRouteHandlerContext>
-) {
+export function registerApiAnalysisRoutes(router: IRouter<AutomaticImportRouteHandlerContext>) {
   router.versioned
     .post({
       path: ANALYZE_API_PATH,
@@ -56,7 +54,7 @@ export function registerApiAnalysisRoutes(
       },
       withAvailability(async (context, req, res): Promise<IKibanaResponse<AnalyzeApiResponse>> => {
         const { dataStreamTitle, pathOptions, langSmithOptions } = req.body;
-        const { getStartServices, logger } = await context.integrationAssistant;
+        const { getStartServices, logger } = await context.automaticImport;
         const [, { actions: actionsPlugin }] = await getStartServices();
 
         try {

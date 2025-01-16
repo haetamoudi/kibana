@@ -5,10 +5,10 @@
  * 2.0.
  */
 
+import { ANALYZE_API_PATH } from '../../common';
 import { serverMock } from '../__mocks__/mock_server';
 import { requestMock } from '../__mocks__/request';
 import { requestContextMock } from '../__mocks__/request_context';
-import { ANALYZE_API_PATH } from '../../common';
 import { registerApiAnalysisRoutes } from './analyze_api_route';
 
 const mockResult = jest.fn().mockResolvedValue({ results: { suggestedPaths: ['', ''] } });
@@ -56,9 +56,9 @@ describe('registerApiAnalysisRoute', () => {
     expect(response.status).toEqual(400);
   });
 
-  describe('when the integration assistant is not available', () => {
+  describe('when the Automatic Import is not available', () => {
     beforeEach(() => {
-      context.integrationAssistant.isAvailable.mockReturnValue(false);
+      context.automaticImport.isAvailable.mockReturnValue(false);
     });
 
     it('returns a 404', async () => {

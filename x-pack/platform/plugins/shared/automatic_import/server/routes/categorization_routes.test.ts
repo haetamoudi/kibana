@@ -5,10 +5,10 @@
  * 2.0.
  */
 
+import { CATEGORIZATION_GRAPH_PATH } from '../../common';
 import { serverMock } from '../__mocks__/mock_server';
 import { requestMock } from '../__mocks__/request';
 import { requestContextMock } from '../__mocks__/request_context';
-import { CATEGORIZATION_GRAPH_PATH } from '../../common';
 import { registerCategorizationRoutes } from './categorization_routes';
 
 const mockResult = jest.fn().mockResolvedValue({
@@ -68,9 +68,9 @@ describe('registerCategorizationRoute', () => {
     expect(response.status).toEqual(400);
   });
 
-  describe('when the integration assistant is not available', () => {
+  describe('when the automatic import is not available', () => {
     beforeEach(() => {
-      context.integrationAssistant.isAvailable.mockReturnValue(false);
+      context.automaticImport.isAvailable.mockReturnValue(false);
     });
 
     it('returns a 404', async () => {

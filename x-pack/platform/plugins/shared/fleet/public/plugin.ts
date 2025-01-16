@@ -70,6 +70,7 @@ import type {
 
 import { API_VERSIONS } from '../common/constants';
 
+import { AutomaticImportPluginStart } from '@kbn/automatic-import-plugin/server/types';
 import { TutorialDirectoryHeaderLink, TutorialModuleNotice } from './components/home_integration';
 import { CUSTOM_LOGS_INTEGRATION_NAME, INTEGRATIONS_BASE_PATH } from './constants';
 import { getFleetDeepLinks } from './deep_links';
@@ -131,7 +132,7 @@ export interface FleetStartDeps {
   navigation: NavigationPublicPluginStart;
   customIntegrations: CustomIntegrationsStart;
   share: SharePluginStart;
-  integrationAssistant?: AutomaticImportPluginStart;
+  automaticImport?: AutomaticImportPluginStart;
   cloud?: CloudStart;
   usageCollection?: UsageCollectionStart;
   guidedOnboarding?: GuidedOnboardingPluginStart;
@@ -141,7 +142,7 @@ export interface FleetStartServices extends CoreStart, Exclude<FleetStartDeps, '
   storage: Storage;
   share: SharePluginStart;
   dashboard: DashboardStart;
-  integrationAssistant?: AutomaticImportPluginStart;
+  automaticImport?: AutomaticImportPluginStart;
   cloud?: CloudSetup & CloudStart;
   discover?: DiscoverStart;
   spaces?: SpacesPluginStart;

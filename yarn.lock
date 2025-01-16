@@ -4054,7 +4054,7 @@
   version "0.0.0"
   uid ""
 
-"@kbn/automatic_import-plugin@link:x-pack/platform/plugins/shared/automatic_import":
+"@kbn/automatic-import-plugin@link:x-pack/platform/plugins/shared/automatic_import":
   version "0.0.0"
   uid ""
 

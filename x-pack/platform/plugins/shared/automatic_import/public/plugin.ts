@@ -9,7 +9,7 @@ import type { CoreSetup, CoreStart, Plugin, PluginInitializerContext } from '@kb
 import { BehaviorSubject } from 'rxjs';
 import type { ExperimentalFeatures } from '../common/experimental_features';
 import { parseExperimentalConfigValue } from '../common/experimental_features';
-import { type IntegrationAssistantConfigType } from '../server/config';
+import { type AutomaticImportConfigType } from '../server/config';
 import { getCreateIntegrationLazy } from './components/create_integration';
 import { getCreateIntegrationCardButtonLazy } from './components/create_integration_card_button';
 import {
@@ -21,19 +21,19 @@ import {
 import type {
   AutomaticImportPluginSetup,
   AutomaticImportPluginStart,
-  IntegrationAssistantPluginStartDependencies,
+  AutomaticImportPluginStartDependencies,
 } from './types';
 
-export class IntegrationAssistantPlugin
+export class AutomaticImportPlugin
   implements Plugin<AutomaticImportPluginSetup, AutomaticImportPluginStart>
 {
   private telemetry = new Telemetry();
   private renderUpselling$ = new BehaviorSubject<RenderUpselling | undefined>(undefined);
-  private config: IntegrationAssistantConfigType;
+  private config: AutomaticImportConfigType;
   private experimentalFeatures: ExperimentalFeatures;
 
   constructor(private readonly initializerContext: PluginInitializerContext) {
-    this.config = this.initializerContext.config.get<IntegrationAssistantConfigType>();
+    this.config = this.initializerContext.config.get<AutomaticImportConfigType>();
     this.experimentalFeatures = parseExperimentalConfigValue(this.config.enableExperimental || []);
     ExperimentalFeaturesService.init(this.experimentalFeatures);
   }
@@ -46,7 +46,7 @@ export class IntegrationAssistantPlugin
 
   public start(
     core: CoreStart,
-    dependencies: IntegrationAssistantPluginStartDependencies
+    dependencies: AutomaticImportPluginStartDependencies
   ): AutomaticImportPluginStart {
     const services: Services = {
       ...core,

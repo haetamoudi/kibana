@@ -26,9 +26,9 @@ export const configSchema = schema.object({
     defaultValue: () => [],
   }),
 });
-export type IntegrationAssistantConfigType = TypeOf<typeof configSchema>;
+export type AutomaticImportConfigType = TypeOf<typeof configSchema>;
 
-export const config: PluginConfigDescriptor<IntegrationAssistantConfigType> = {
+export const config: PluginConfigDescriptor<AutomaticImportConfigType> = {
   exposeToBrowser: {
     enableExperimental: true,
   },

@@ -4,14 +4,14 @@
  * 2.0; you may not use this file except in compliance with the Elastic License
  * 2.0.
  */
-import type SuperTest from 'supertest';
 import {
-  RelatedRequestBody,
   RELATED_GRAPH_PATH,
+  RelatedRequestBody,
   RelatedResponse,
-} from '@kbn/integration-assistant-plugin/common';
-import { superUser } from '../authentication/users';
+} from '@kbn/automatic-import-plugin/common';
+import type SuperTest from 'supertest';
 import { User } from '../authentication/types';
+import { superUser } from '../authentication/users';
 import { BadRequestError } from '../error/error';
 
 export const postRelated = async ({

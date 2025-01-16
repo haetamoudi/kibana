@@ -5,13 +5,14 @@
  * 2.0.
  */
 import type SuperTest from 'supertest';
+
 import {
-  CategorizationRequestBody,
   CATEGORIZATION_GRAPH_PATH,
+  CategorizationRequestBody,
   CategorizationResponse,
-} from '@kbn/integration-assistant-plugin/common';
-import { superUser } from '../authentication/users';
+} from '@kbn/automatic-import-plugin/common';
 import { User } from '../authentication/types';
+import { superUser } from '../authentication/users';
 import { BadRequestError } from '../error/error';
 
 export const postCategorization = async ({

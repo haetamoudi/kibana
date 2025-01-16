@@ -1,19 +1,14 @@
 {
   "type": "plugin",
   "id": "@kbn/security-solution-plugin",
-  "owner": [
-    "@elastic/security-solution"
-  ],
+  "owner": ["@elastic/security-solution"],
   "group": "security",
   "visibility": "private",
   "plugin": {
     "id": "securitySolution",
     "browser": true,
     "server": true,
-    "configPath": [
-      "xpack",
-      "securitySolution"
-    ],
+    "configPath": ["xpack", "securitySolution"],
     "requiredPlugins": [
       "actions",
       "alerting",
@@ -77,7 +72,7 @@
       "osquery",
       "savedObjectsTaggingOss",
       "guidedOnboarding",
-      "integrationAssistant",
+      "automaticImport",
       "serverless"
     ],
     "requiredBundles": [
@@ -91,8 +86,6 @@
       "unifiedSearch",
       "esql"
     ],
-    "extraPublicDirs": [
-      "common"
-    ]
+    "extraPublicDirs": ["common"]
   }
 }

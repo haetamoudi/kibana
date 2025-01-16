@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Integration Assistatnt ECS Mapping API endpoint
-  version: "1"
+  title: Automatic Import ECS Mapping API endpoint
+  version: '1'
 paths:
   /internal/automatic_import/ecs:
     post:
@@ -25,27 +25,27 @@ paths:
                 - connectorId
               properties:
                 packageName:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/PackageName"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/PackageName'
                 dataStreamName:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/DataStreamName"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/DataStreamName'
                 rawSamples:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/RawSamples"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/RawSamples'
                 samplesFormat:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/SamplesFormat"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/SamplesFormat'
                 mapping:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Mapping"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Mapping'
                 additionalProcessors:
                   type: array
                   items:
-                    $ref: "../model/processor_attributes.schema.yaml#/components/schemas/ESProcessorItem"
+                    $ref: '../model/processor_attributes.schema.yaml#/components/schemas/ESProcessorItem'
                 connectorId:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Connector"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Connector'
                 langSmithOptions:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/LangSmithOptions"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/LangSmithOptions'
       responses:
         200:
           description: Indicates a successful call.
           content:
             application/json:
               schema:
-                $ref: "../model/response_schemas.schema.yaml#/components/schemas/EcsMappingAPIResponse"
+                $ref: '../model/response_schemas.schema.yaml#/components/schemas/EcsMappingAPIResponse'

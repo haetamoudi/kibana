@@ -20,7 +20,7 @@ import type {
   TaskManagerStartContract,
 } from '@kbn/task-manager-plugin/server';
 
-import type { IntegrationAssistantPluginSetup } from '@kbn/automatic-import-plugin/server';
+import type { AutomaticImportPluginSetup } from '@kbn/automatic-import-plugin/server';
 import type { ServerlessPluginSetup } from '@kbn/serverless/server';
 import type { ProductTier } from '../common/product';
 
@@ -41,7 +41,7 @@ export interface SecuritySolutionServerlessPluginSetupDeps {
   taskManager: TaskManagerSetupContract;
   cloud: CloudSetup;
   actions: ActionsPluginSetupContract;
-  automaticImport?: IntegrationAssistantPluginSetup;
+  automaticImport?: AutomaticImportPluginSetup;
 }
 
 export interface SecuritySolutionServerlessPluginStartDeps {

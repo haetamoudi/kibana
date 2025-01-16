@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Integration Assistatnt Related API endpoint
-  version: "1"
+  title: Automatic Import Related API endpoint
+  version: '1'
 paths:
   /internal/automatic_import/related:
     post:
@@ -26,23 +26,23 @@ paths:
                 - samplesFormat
               properties:
                 packageName:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/PackageName"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/PackageName'
                 dataStreamName:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/DataStreamName"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/DataStreamName'
                 rawSamples:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/RawSamples"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/RawSamples'
                 currentPipeline:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Pipeline"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Pipeline'
                 connectorId:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/Connector"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/Connector'
                 samplesFormat:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/SamplesFormat"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/SamplesFormat'
                 langSmithOptions:
-                  $ref: "../model/common_attributes.schema.yaml#/components/schemas/LangSmithOptions"
+                  $ref: '../model/common_attributes.schema.yaml#/components/schemas/LangSmithOptions'
       responses:
         200:
           description: Indicates a successful call.
           content:
             application/json:
               schema:
-                $ref: "../model/response_schemas.schema.yaml#/components/schemas/RelatedAPIResponse"
+                $ref: '../model/response_schemas.schema.yaml#/components/schemas/RelatedAPIResponse'

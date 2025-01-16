@@ -7,8 +7,8 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import _ from 'lodash';
 import expect from '@kbn/expect';
+import _ from 'lodash';
 
 import '@kbn/core-provider-plugin/types';
 import { PluginFunctionalProviderContext } from '../../services';
@@ -276,7 +276,7 @@ export default function ({ getService }: PluginFunctionalProviderContext) {
         'xpack.infra.sources.default.fields.message (array?)',
         'xpack.index_management.enableTogglingDataRetention (boolean?|never)',
         'xpack.index_management.enableProjectLevelRetentionChecks (boolean?|never)',
-        'xpack.integration_assistant.enableExperimental (array?)',
+        'xpack.automatic_import.enableExperimental (array?)',
         /**
          * Feature flags bellow are conditional based on traditional/serverless offering
          */
